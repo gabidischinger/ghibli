@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import Movie from './pages/movies/movies';
+import MoviesContext from './context/moviesContext';
+
 
 function App() {
+
+  let [movies, setMovies] = useState();
+  let firstMovie = 0;
+  let lastMovie = 4;
+
+  const getMovies = () => {
+    fetch('https://ghibliapi.herokuapp.com/films/')
+      .then(res => res.json())
+      .then(setMovies)
+  }
+
+  const moviesList = () => {
+    if (movies) {
+      for (let i = firstMovie; i <= lastMovie; i++) {
+        return <Movie title={movies[i].title} />
+      }
+    }
+  }
+
+  useEffect(
+    () => getMovies(), []
+  )
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {moviesList()}
     </div>
   );
 }
