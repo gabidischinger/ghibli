@@ -5,14 +5,11 @@ import MoviesContext from '../../context/moviesContext';
 
 function Movie({ title }) {
 
-    const getMoreInfo = (movieTitle) => {
-        fetch(`http://www.omdbapi.com/?apikey=d522f8e6&t=${movieTitle}`)
-            .then(res => res.json())
-    }
+    
 
     return (
         <div>
-            {title}
+            <PosterContainer title={title} />
         </div>
     );
 }
