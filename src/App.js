@@ -1,36 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Link, Switch, Route } from 'react-router-dom';
 import Movie from './pages/movies/movies';
-import MoviesContext from './context/moviesContext';
+import Characters from './pages/characters/characters';
+import './App.css';
 
 
 function App() {
 
-  let [movies, setMovies] = useState();
-  let firstMovie = 0;
-  let lastMovie = 4;
-
-  const getMovies = () => {
-    fetch('https://ghibliapi.herokuapp.com/films/')
-      .then(res => res.json())
-      .then(setMovies)
-  }
-
-  const moviesList = () => {
-    if (movies) {
-      for (let i = firstMovie; i <= lastMovie; i++) {
-        return <Movie title={movies[i].title} />
-      }
-    }
-  }
-
-  useEffect(
-    () => getMovies(), []
-  )
-
 
   return (
     <div className="App">
-      {moviesList()}
+      <nav>
+        <ul>
+          <li id='home'><Link to={'/'}>Movies</Link></li>
+          <li id='characters'><Link to={'/characters'}>Characters</Link></li>
+        </ul>
+      </nav>
+
+      <Switch>
+        <Route exact path='/'>
+          <Movie />
+        </Route>
+
+        <Route path='/characters'>
+          <Characters />
+        </Route>
+      </Switch>
+
+
     </div>
   );
 }

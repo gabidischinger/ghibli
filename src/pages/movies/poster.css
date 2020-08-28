@@ -1,0 +1,76 @@
+img {
+    border-radius: 10px;
+}
+
+button
+{
+    border-radius: 50%;
+    display:inline-block;
+    padding:0.3em 1.2em;
+    margin:0 0.1em 0.1em 0;
+    border:0.16em solid rgba(255,255,255,0);
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-size: 18px;
+    font-weight:300;
+    color:#0099FF;
+    text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+    text-align:center;
+    
+}
+
+button:hover{
+    border-color: #0099FF;
+}
+
+.btn-prev{
+    position: fixed;
+    bottom: 60%;
+    right: 3%;
+}
+
+.btn-next{
+    position: fixed;
+    bottom:60%;
+    left: 3%;
+}
+
+.movie-poster {
+    display: inline;
+    margin: 1%;
+}
+
+.movie-info{
+    display: block;
+    margin-left: 10%;
+    margin-right: 50%;
+    margin-top: 3%;
+}
+
+.movie-title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.poster-center {
+    height: 50vh;
+    -webkit-box-shadow: 10px 10px 12px -1px rgba(128,126,128,1);
+    -moz-box-shadow: 10px 10px 12px -1px rgba(128,126,128,1);
+    box-shadow: 10px 10px 12px -1px rgba(128,126,128,1);
+}
+
+.poster-not-center {
+    height: 40vh;
+    -webkit-box-shadow: 10px 10px 12px -1px rgba(128,126,128,1);
+    -moz-box-shadow: 10px 10px 12px -1px rgba(128,126,128,1);
+    box-shadow: 10px 10px 12px -1px rgba(128,126,128,1);
+    -ms-transform: translateY(-15%);
+    transform: translateY(-15%);
+}
+
+.five-posters {
+    margin-right: 5%;
+    margin-left: 8%;
+}

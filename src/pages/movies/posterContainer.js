@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import './poster.css';
 
-function PosterContainer ({title}) {
+function PosterContainer({ title, isHighlight }) {
 
-    let [movieInfo, setMovieInfo] = useState();
+    const [movieInfo, setMovieInfo] = useState();
 
     const getMoreInfo = (movieTitle) => {
         fetch(`http://www.omdbapi.com/?apikey=d522f8e6&t=${movieTitle}`)
@@ -10,14 +11,15 @@ function PosterContainer ({title}) {
             .then(data => setMovieInfo(data))
     }
 
-    useEffect (
+    useEffect(
         () => getMoreInfo(title), []
     )
 
-    return(
-        <div>
-            {title}
-            {console.log(movieInfo)}
+    return (
+        <div className='movie-poster'>
+            {movieInfo &&
+                <img className={isHighlight ? 'poster-center' : 'poster-not-center'} src={movieInfo.Poster} alt={'Poster' + title} />
+            }
         </div>
     );
 }
