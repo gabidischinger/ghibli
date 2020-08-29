@@ -6,7 +6,7 @@ import './poster.css';
 
 function Movie({ title }) {
 
-    const [movies, setMovies] = useState();
+    const [movies, setMovies] = useState([]);
     const [i, setI] = useState(2);
 
     const getMovies = () => {
@@ -15,28 +15,9 @@ function Movie({ title }) {
             .then(setMovies)
     }
 
-    const handleClickNext = () => {
+    const handleClickNext = () => setI(i === movies.length - 1 ? 0 : i + 1);
 
-
-        if (i === movies.length - 1)
-        {
-            setI(0);
-        } else {
-            setI(i + 1);
-        }
-
-    }
-
-    const handleClickPrevious = () => {
-
-        if (i === 0)
-        {
-            setI(movies.length - 1);
-        } else {
-            setI(i - 1);
-        }
-
-    }
+    const handleClickPrevious = () => setI(i === 0 ? movies.length - 1 : i - 1);
 
     useEffect(
         () => getMovies(), [i]
@@ -46,25 +27,19 @@ function Movie({ title }) {
         <div className='movie-poster'>
             <button className='btn-next' onClick={handleClickPrevious}>&lt;</button>
             <div className="five-posters">
+                {i === 0 && <PosterContainer title={movies[movies.length -2].title} isHighlight={false} />}
+                { i < 2 && <PosterContainer title={movies[movies.length -1].title} isHighlight={false} />}
                 {movies &&
                     movies.map((movie, index) =>
                         <PosterContainer key={movie.id} title={movies[index].title} isHighlight={index === i} />
-                    ).filter((movie, index) => {
-                        if ( i + 2 === movies.length - 1) {
-                            return index >= i - 2 || index === 0;
-                        } else if ( i + 1 === movies.length - 1) {
-                            return index >= i - 2 || index === 0 || index === 1;
-                        } else if (i  === movies.length - 1) {
-                            return index >= i - 2 || index === 0 || index === 1 || index === 2;
-                        } 
-                        else {
-                            return index >= i - 2 && index <= i + 2;
-                        }
-                    })}
+                    ).filter((movie, index) => index <= i+2 && index >= i-2)
+                }
+                {(i >= movies.length - 2 && movies.length > 0 ) && <PosterContainer title={movies[0].title} isHighlight={false} />}
+                {(i === movies.length - 1 && movies.length > 0) && <PosterContainer title={movies[1].title} isHighlight={false} />}
             </div>
             <button className='btn-prev' onClick={handleClickNext}>&gt;</button>
             {
-                movies &&
+                movies.length>0 &&
                 <MovieInfo key={movies[i].id} title={movies[i].title} />
             }
         </div>
